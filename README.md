@@ -318,7 +318,7 @@ Now, restart your computer and return to the guide.
 Next, you will have to take ownership of `C:\Program Files\WindowsApps\` and `C:\ProgramData\Microsoft` using **NFTS Access**. 
 > Refer to the images below.
 
-![NTFSAcess Removal Preview](https://imgur.com/a/WHVi6u6.png)
+![NTFSAcess Removal Preview](https://imgur.com/orEK0zz.png)
 <p align="center"><sub>NTFSAcess Removal Preview</sub></p>
 
 Once you take ownership of both folders,
