@@ -1,4 +1,4 @@
-<h1 align="center"> Windows Debloat Guide </h1>
+<h1 align="center"> 🗑 Windows Debloat Guide </h1>
 
 ## Introduction
 
@@ -59,7 +59,7 @@ DISM /Online /Cleanup-Image /StartComponentCleanup /ResetBase
 
 ### Alarms and Clock
 
-- Run in Powershell,
+**Run in Powershell,**
 ```ps
 Get-AppxPackage -AllUsers *alarms* | Remove-AppxPackage
 Get-AppxPackage -AllUsers *people* | Remove-AppxPackage
@@ -67,7 +67,7 @@ Get-AppxPackage -AllUsers *people* | Remove-AppxPackage
 
 ### Calculator
 
-- Run in Powershell,
+**Run in Powershell,**
 ```ps
 Get-AppxPackage -AllUsers *calc* | Remove-AppxPackage
 ```
@@ -75,7 +75,7 @@ Get-AppxPackage -AllUsers *calc* | Remove-AppxPackage
 
 ### Mail, Calendar, ...
 
-- Run in Powershell,
+**Run in Powershell,**
 ```ps
 Get-AppxPackage -AllUsers *comm* | Remove-AppxPackage
 Get-AppxPackage -AllUsers *mess* | Remove-AppxPackage
@@ -83,7 +83,7 @@ Get-AppxPackage -AllUsers *mess* | Remove-AppxPackage
 
 ### Camera
 
-- Run in Powershell,
+**Run in Powershell,**
 ```ps
 Get-AppxPackage -AllUsers *camera* | Remove-AppxPackage
 ```
@@ -92,28 +92,28 @@ Get-AppxPackage -AllUsers *camera* | Remove-AppxPackage
 ### Connect
 
 
-- Run in Command Prompt,
+**Run in Command Prompt,**
 ```cmd
 install_wim_tweak /o /c Microsoft-PPIProjection-Package /r
 ```
 
 ### Contact Support, Get Help
 
-- Run in Command Prompt,
+**Run in Command Prompt,**
 ```cmd
 install_wim_tweak /o /c Microsoft-Windows-ContactSupport /r
 ```
 
 ### Cortana (UWP App)
 
-- Run in Powershell,
+**Run in Powershell,**
 ```ps
 Get-AppxPackage -allusers Microsoft.549981C3F5F10 | Remove-AppxPackage
 ```
 
 ### Music, TV
 
-- Run in Powershell,
+**Run in Powershell,**
 ```
 Get-AppxPackage -AllUsers *zune* | Remove-AppxPackage
 Get-WindowsPackage -Online | Where PackageName -like *MediaPlayer* | Remove-WindowsPackage -Online -NoRestart
@@ -121,21 +121,21 @@ Get-WindowsPackage -Online | Where PackageName -like *MediaPlayer* | Remove-Wind
 
 ### Groove Music
 
-- Run in Powershell,
+**Run in Powershell,**
 ```ps
 Get-AppxPackage -AllUsers *zune* | Remove-AppxPackage
 ```
 
 ### Microsoft Solitare Collection
 
-- Run in Powershell,
+**Run in Powershell,**
 ```ps
 Get-AppxPackage *Microsoft.MicrosoftSolitaireCollection* | Remove-AppxPackage
 ```
 
 ### Office
 
-- Run in Powershell,
+**Run in Powershell,**
 ```ps
 Get-AppxPackage *Microsoft.MicrosoftOfficeHub* | Remove-AppxPackage
 Get-AppxPackage *Microsoft.Office.Sway* | Remove-AppxPackage
@@ -144,33 +144,33 @@ Get-AppxPackage *Microsoft.Office.Desktop* | Remove-AppxPackage
 
 ### Get Help
 
-- Run in Powershell,
+**Run in Powershell,**
 ```ps
 Get-AppxPackage -AllUsers *GetHelp* | Remove-AppxPackage
 ```
 
 ### Feedback Hub
 
-- Run in Powershell,
+**Run in Powershell,**
 ```
 Get-AppxPackage *Microsoft.WindowsFeedbackHub* | Remove-AppxPackage
 ```
 
 ### Sticky Notes
 
-- Run in Powershell,
+**Run in Powershell,**
 ```
 Get-AppxPackage -AllUsers *sticky* | Remove-AppxPackage
 ```
 
 ### Maps
 
-- Run in Powershell,
+**Run in Powershell,**
 ```
 Get-AppxPackage -AllUsers *maps* | Remove-AppxPackage
 ```
 
-- Run in Command Prompt,
+**Run in Command Prompt,**
 ```
 sc delete MapsBroker
 sc delete lfsvc
@@ -180,28 +180,28 @@ schtasks /Change /TN "\Microsoft\Windows\Maps\MapsToastTask" /disable
 
 ### OneNote
 
-- Run in Powershell,
+**Run in Powershell,**
 ```
 Get-AppxPackage -AllUsers *onenote* | Remove-AppxPackage
 ```
 
 ### Photos
 
-- Run in Powershell,
+**Run in Powershell,**
 ```
 Get-AppxPackage -AllUsers *photo* | Remove-AppxPackage
 ```
 
 ### Weather, News, ...
 
-- Run in Powershell,
+**Run in Powershell,**
 ```
 Get-AppxPackage -AllUsers *bing* | Remove-AppxPackage
 ```
 
 ### Sound Recorder
 
-- Run in Powershell,
+**Run in Powershell,**
 ```
 Get-AppxPackage -AllUsers *soundrec* | Remove-AppxPackage
 ```
@@ -209,13 +209,13 @@ Get-AppxPackage -AllUsers *soundrec* | Remove-AppxPackage
 
 ### Microsoft Quick Assist
 
-- Run in Powershell,
+**Run in Powershell,**
 ```
 Get-WindowsPackage -Online | Where PackageName -like *QuickAssist* | Remove-WindowsPackage -Online -NoRestart
 ```
 ### OneDrive
 
-- Run in Command Prompt,
+**Run in Command Prompt,**
 ```
 %SystemRoot%\SysWOW64\OneDriveSetup.exe /uninstall
 rd "%UserProfile%\OneDrive" /s /q
@@ -227,32 +227,32 @@ del "%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\OneDriv
 
 ### Your Phone
 
-- Run in Powershell,
+**Run in Powershell,**
 ```ps
 Get-AppxPackage -AllUsers *phone* | Remove-AppxPackage
 ```
 
 ### Hello Face
 
-- Run in Powershell,
+**Run in Powershell,**
 ```
 Get-WindowsPackage -Online | Where PackageName -like *Hello-Face* | Remove-WindowsPackage -Online -NoRestart
 ```
 
-- Run in Command Prompt,
+**Run in Command Prompt,**
 ```
 schtasks /Change /TN "\Microsoft\Windows\HelloFace\FODCleanupTask" /Disable
 ```
 
 ### Microsoft Store 
 
-- Run in Powershell,
+**Run in Powershell,**
 ```ps
 Get-AppxPackage -AllUsers *store* | Remove-AppxPackage
 ```
 > Ignore errors, if there are any.
 
-- Run in Command Prompt,
+**Run in Command Prompt,**
 ```
 install_wim_tweak /o /c Microsoft-Windows-ContentDeliveryManager /r
 install_wim_tweak /o /c Microsoft-Windows-Store /r
@@ -260,7 +260,7 @@ install_wim_tweak /o /c Microsoft-Windows-Store /r
 
 <br> **⚠ Do NOT run the following commands if you will be using any UWP app in the future.**
 
-- Run in Command Prompt,
+**Run in Command Prompt,**
 ```cmd
 reg add "HKLM\Software\Policies\Microsoft\WindowsStore" /v RemoveWindowsStore /t REG_DWORD /d 1 /f
 reg add "HKLM\Software\Policies\Microsoft\WindowsStore" /v DisableStoreApps /t REG_DWORD /d 1 /f
@@ -272,12 +272,12 @@ sc delete PushToInstall
 
 ### Xbox and Game DVR
 
-- Run in Powershell,
+**Run in Powershell,**
 ```ps
 Get-AppxPackage -AllUsers *xbox* | Remove-AppxPackage
 ```
 
-- Run in Command Prompt,
+**Run in Command Prompt,**
 ```cmd
 sc delete XblAuthManager
 sc delete XblGameSave
