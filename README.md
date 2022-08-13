@@ -1,21 +1,27 @@
 # Windows Debloat Guide
 
-## IMPORTANT
+## Introduction
 
-All of the modifications you will be making after following this guide **CANNOT* be reversed or undone without reinstalling Windows. Therefore, please do not follow this guide if:
-- You do not know what you are doing or are inexperienced
-- You need to use a Microsoft Account for whatever reason
+Because of its extensive telemetry and online features, Windows has sparked several privacy concerns. When telemetry is set to basic, most of it appears to be legitimate, but if you don't trust them, here's how to stop Windows from sending your data to Microsoft and debloat your system.
+> **Last updated:** August 13, 2022
+
+
+#### IMPORTANT
+
+All changes you make after following this guide **CANNOT** be reversed or undone without reinstalling Windows. Therefore, please do not follow this guide if:
+- You have no idea what you're doing or are inexperienced
+- For whatever reason, you must use a Microsoft Account
 - You need the Windows Store to install applications
-- You want to receive feature updates for Windows
-- You do not use a third-party antivirus and need Windows Defender
+- You want to receive Windows feature updates
+- You do not use a third-party antivirus and therefore require Windows Defender
 
-> **NOTE:** Please keep in mind that you are doing this at your own risk, and I won't be held accountable for any form of data loss or damage. So make sure to backup all your files.
+> Please keep in mind that you are doing this entirely at your own risk, and I will not be held liable for any data loss or damage. So make a backup of all your files.
 
-## Pre-Requisite
+## Prerequisite
 
-Following are the things you will need to have setup before getting started. An installation/setup guide for each has also been provided whereever necessary.
+The following are the prerequisites you must have before you begin. And wherever possible, an installation/setup guide has been included.
 
-> **NOTE** Please clone the repository to your system. The repo has all the required files.
+> Please clone the repository to your computer. The repo contains all of the necessary files.
 
 - Wim Tweak Tool:
     - Open RUN (`Win + R`), type `system32` and press **OK**. This will open the **System32** folder.
@@ -32,26 +38,24 @@ Following are the things you will need to have setup before getting started. An 
 
 ## Uninstalling Bloatware
 
-
 ### For clean installs ONLY
 
-If you are on a clean install of Windows and haven't set anything up, you might want to clean up the component store. Please follow the steps below to do so,
+If you have a fresh Windows installation and haven't yet configured anything, you might want to clean up the component store. Please follow the instructions below to do so.
 
 - Extract the provided `Dism++ 10.1.1002.1` and run `DISM++ x64` or `DISM++ x86` file as per your OS.
 - Navigate to **Disk Cleanup** from the left-pane, and tick all the checkboxes you see.
 - Press **Scan** which is on the bottom right, and after it's done, just press **Clean Up**.
 
-![DISM_Guide](https://imgur.com/hWozpNi)
+![DISM_Guide](https://imgur.com/hWozpNi.png)
 <p align="center"><sub>DISM Guide</sub></p>
 
-**NOTE:** If get an error while cleaning up the component store, run the following command in Command Prompt (Admin):
-```cmd
+If you encounter an error while cleaning up the component store, use Command Prompt (Admin) to execute the following command:
+```
 DISM /Online /Cleanup-Image /StartComponentCleanup /ResetBase
 ```
-Once the command finishes executing, you can move on to uninstalling metro apps.
 
 
-**IMPORTANT:** Always run Powershell and/or Command Prompt as Admin when executing the commands below. Also, each command will have a flair stating in which of the two aforementioned terminals you need to the command. 
+**IMPORTANT:** When executing the commands below, always run Powershell and/or Command Prompt as Administrator.
 
 ### Alarms and Clock
 
@@ -67,7 +71,7 @@ Get-AppxPackage -AllUsers *people* | Remove-AppxPackage
 ```ps
 Get-AppxPackage -AllUsers *calc* | Remove-AppxPackage
 ```
-As a replacement, you can use the [Classic Calculator](https://winaero.com/get-calculator-from-windows-8-and-windows-7-in-windows-10/).
+> As a replacement, you can use the [Classic Calculator](https://winaero.com/get-calculator-from-windows-8-and-windows-7-in-windows-10/) app.
 
 ### Mail, Calendar, ...
 
@@ -83,7 +87,7 @@ Get-AppxPackage -AllUsers *mess* | Remove-AppxPackage
 ```ps
 Get-AppxPackage -AllUsers *camera* | Remove-AppxPackage
 ```
-> Ignore any errors, if there are any.
+> Ignore errors, if there are any.
 
 ### Connect
 
@@ -201,7 +205,7 @@ Get-AppxPackage -AllUsers *bing* | Remove-AppxPackage
 ```
 Get-AppxPackage -AllUsers *soundrec* | Remove-AppxPackage
 ```
-Alternatives [Audacity](http://www.audacityteam.org/)
+> As a replacement, you can use [Audacity](http://www.audacityteam.org/).
 
 ### Microsoft Quick Assist
 
@@ -246,14 +250,14 @@ schtasks /Change /TN "\Microsoft\Windows\HelloFace\FODCleanupTask" /Disable
 ```ps
 Get-AppxPackage -AllUsers *store* | Remove-AppxPackage
 ```
-You can ignore any error that pops up.<br>
+> Ignore errors, if there are any.
 
 - Run in Command Prompt,
 ```
 install_wim_tweak /o /c Microsoft-Windows-ContentDeliveryManager /r
 install_wim_tweak /o /c Microsoft-Windows-Store /r
 ```
->**NOTE:** Do NOT run the commands below if you will be using any UWP app in the future.
+> ⚠ Do NOT run the commands below if you will be using any UWP app in the future.
 
 - Run in Command Prompt,
 ```cmd
