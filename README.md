@@ -6,7 +6,7 @@ Because of its extensive telemetry and online features, Windows has sparked seve
 > **Last updated:** August 13, 2022
 
 
-#### IMPORTANT:
+#### ⚠ IMPORTANT:
 
 All changes you make after following this guide **CANNOT** be reversed or undone without reinstalling Windows. Therefore, please do not follow this guide if:
 - You have no idea what you're doing or are inexperienced
@@ -21,7 +21,7 @@ Please keep in mind that you are doing this entirely at your own risk, and I wil
 
 The following are the prerequisites you must have before you begin. And wherever possible, an installation/setup guide has been included.
 
-> ℹ Please clone the repository to your computer. The repo contains all of the necessary files.
+ℹ Please clone the repository to your computer. The repo contains all of the necessary files.
 
 - Wim Tweak Tool:
     - Open RUN (`Win + R`), type `system32` and press **OK**. This will open the **System32** folder.
@@ -55,7 +55,7 @@ DISM /Online /Cleanup-Image /StartComponentCleanup /ResetBase
 ```
 <br>
 
-**IMPORTANT:** When executing the commands below, always run Powershell and/or Command Prompt as Administrator.
+**⚠IMPORTANT:** When executing the commands below, always run Powershell and/or Command Prompt as Administrator.
 
 ### Alarms and Clock
 
@@ -256,9 +256,9 @@ Get-AppxPackage -AllUsers *store* | Remove-AppxPackage
 ```
 install_wim_tweak /o /c Microsoft-Windows-ContentDeliveryManager /r
 install_wim_tweak /o /c Microsoft-Windows-Store /r
-```
+``` 
 
-> **⚠ Do NOT run the commands below if you will be using any UWP app in the future.**
+<br> **⚠ Do NOT run the commands below if you will be using any UWP app in the future.**
 
 - Run in Command Prompt,
 ```cmd
