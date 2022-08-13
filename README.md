@@ -257,7 +257,7 @@ Get-AppxPackage -AllUsers *store* | Remove-AppxPackage
 install_wim_tweak /o /c Microsoft-Windows-ContentDeliveryManager /r
 install_wim_tweak /o /c Microsoft-Windows-Store /r
 ```
-> ⚠ Do NOT run the commands below if you will be using any UWP app in the future.
+**⚠ Do NOT run the commands below if you will be using any UWP app in the future.**
 
 - Run in Command Prompt,
 ```cmd
