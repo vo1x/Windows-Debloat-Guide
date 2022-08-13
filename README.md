@@ -55,6 +55,8 @@ DISM /Online /Cleanup-Image /StartComponentCleanup /ResetBase
 ```
 <br>
 
+Once that's done, you can move on to uninstalling the apps.
+
 **⚠IMPORTANT:** When executing the commands below, always run Powershell and/or Command Prompt as Administrator.
 
 ### Alarms and Clock
