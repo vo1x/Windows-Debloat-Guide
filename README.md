@@ -1,4 +1,4 @@
-# Windows Debloat Guide
+<h1 align="center"> Windows Debloat Guide </h1>
 
 ## Introduction
 
@@ -6,7 +6,7 @@ Because of its extensive telemetry and online features, Windows has sparked seve
 > **Last updated:** August 13, 2022
 
 
-#### IMPORTANT
+#### IMPORTANT:
 
 All changes you make after following this guide **CANNOT** be reversed or undone without reinstalling Windows. Therefore, please do not follow this guide if:
 - You have no idea what you're doing or are inexperienced
@@ -15,13 +15,13 @@ All changes you make after following this guide **CANNOT** be reversed or undone
 - You want to receive Windows feature updates
 - You do not use a third-party antivirus and therefore require Windows Defender
 
-> Please keep in mind that you are doing this entirely at your own risk, and I will not be held liable for any data loss or damage. So make a backup of all your files.
+Please keep in mind that you are doing this entirely at your own risk, and I will not be held liable for any data loss or damage. So make a backup of all your files.
 
-## Prerequisite
+## Prerequisites
 
 The following are the prerequisites you must have before you begin. And wherever possible, an installation/setup guide has been included.
 
-> Please clone the repository to your computer. The repo contains all of the necessary files.
+> ℹ Please clone the repository to your computer. The repo contains all of the necessary files.
 
 - Wim Tweak Tool:
     - Open RUN (`Win + R`), type `system32` and press **OK**. This will open the **System32** folder.
@@ -38,7 +38,7 @@ The following are the prerequisites you must have before you begin. And wherever
 
 ## Uninstalling Bloatware
 
-### For clean installs ONLY
+#### For clean installs ONLY:
 
 If you have a fresh Windows installation and haven't yet configured anything, you might want to clean up the component store. Please follow the instructions below to do so.
 
@@ -53,7 +53,7 @@ If you encounter an error while cleaning up the component store, use Command Pro
 ```
 DISM /Online /Cleanup-Image /StartComponentCleanup /ResetBase
 ```
-
+<br>
 
 **IMPORTANT:** When executing the commands below, always run Powershell and/or Command Prompt as Administrator.
 
@@ -257,6 +257,7 @@ Get-AppxPackage -AllUsers *store* | Remove-AppxPackage
 install_wim_tweak /o /c Microsoft-Windows-ContentDeliveryManager /r
 install_wim_tweak /o /c Microsoft-Windows-Store /r
 ```
+
 > **⚠ Do NOT run the commands below if you will be using any UWP app in the future.**
 
 - Run in Command Prompt,
