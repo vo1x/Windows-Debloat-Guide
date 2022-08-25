@@ -3,7 +3,7 @@
 ## Introduction
 
 Because of its extensive telemetry and online features, Windows has sparked several privacy concerns. When telemetry is set to basic, most of it appears to be legitimate, but if you don't trust them, here's how to stop Windows from sending your data to Microsoft and debloat your system.
-> **Last updated:** August 13, 2022
+> **Last updated:** August 25, 2022
 
 
 #### ⚠ IMPORTANT:
