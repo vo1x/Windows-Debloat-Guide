@@ -262,7 +262,7 @@ install_wim_tweak /o /c Microsoft-Windows-ContentDeliveryManager /r
 install_wim_tweak /o /c Microsoft-Windows-Store /r
 ``` 
 
-<br> **⚠ Do NOT run the following commands if you will be using any UWP app in the future.**
+<br> **⚠ Warning:** Do NOT run the following commands if you will be using any UWP app in the future.
 
 **Run in Command Prompt,**
 ```cmd
@@ -306,11 +306,11 @@ reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\GameDVR" /v AllowGameDVR /t RE
     install_wim_tweak.exe /o /c "Microsoft-Windows-Internet-Browser-Package" /r
     install_wim_tweak.exe /h /o /l
     ```
-⚠ After running the above commands, you must restart your computer. However, you can skip it for the time being and restart after the debloating process is complete.
+**⚠ Warning:** After running the above commands, you must restart your computer. However, you can skip it for the time being and restart after the debloating process is complete.
 
 ## Removing Windows Defender
 
-**⚠ Please note that this will break Windows Updates.**
+**⚠ Warning:** This will break Windows Updates.
 
 **Run in Command Prompt,**
 ```
@@ -541,11 +541,13 @@ Lastly, **REBOOT YOUR SYSTEM TO FINISH DEBLOATING**.
 ## FAQs
 
 1. Can Windows revert these changes?
--> Yes, Windows can and will revert these changes whenever a major update is installed. Users who've disabled Windows Updates
+
+**->** Yes, Windows can and will revert these changes whenever a major update is installed. Users who've disabled Windows Updates
 should be unaffected.
 
 2. Will this hinder my daily workflow?
--> In most cases this shouldn't affect your daily workflow. However, as we've disabled quite a lot of "features" some users may be affected. So it's highly recommended you do not skip anything mentioned in the guide.
+
+**->** In most cases this shouldn't affect your daily workflow. However, as we've disabled quite a lot of "features" some users may be affected. So it's highly recommended you do not skip anything mentioned in the guide.
 
 
 
