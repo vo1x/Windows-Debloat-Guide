@@ -2,7 +2,8 @@
 
 ## Introduction
 
-Because of its extensive telemetry and online features, Windows has sparked several privacy concerns. When telemetry is set to basic, most of it appears to be legitimate, but if you don't trust them, here's how to stop Windows from sending your data to Microsoft and debloat your system.
+Windows comes with an extensive list of pre-installed apps (metro apps) and is cluttered with advertisements and other data gathering features that some users may dislike. As a result, the purpose of this guide is to assist you in removing all bloatware and cleaning up your Windows installation.
+
 > **Last updated:** August 25, 2022
 
 
