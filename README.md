@@ -310,7 +310,7 @@ reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\GameDVR" /v AllowGameDVR /t RE
 
 ## Removing Windows Defender
 
-⚠ Please note that this will break Windows Updates.
+**⚠ Please note that this will break Windows Updates.**
 
 **Run in Command Prompt,**
 ```
@@ -343,6 +343,224 @@ Next, you will have to take ownership of `C:\Program Files\WindowsApps\` and `C:
 Once you take ownership of both folders,
 - Navigate to `C:\Program Files\WindowsApps\` and delete the **SecHealthUI** folder.
 - Navigate to `C:\ProgramData\Microsoft` and delete all Windows Defender-related files.
+
+## Disabling Cortana
+
+With the Anniversary Update, Microsoft hid the option to disable Cortana. So you need to make a couple registry changes to disable Cortana (to an extent). 
+**Run in Command Prompt,**
+```
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v AllowCortana /t REG_DWORD /d 0 /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules"  /v "{2765E0F4-2918-4A46-B9C9-43CDD8FCBA2B}" /t REG_SZ /d  "BlockCortana|Action=Block|Active=TRUE|Dir=Out|App=C:\windows\systemapps\microsoft.windows.cortana_cw5n1h2txyewy\searchui.exe|Name=Search  and Cortana  application|AppPkgId=S-1-15-2-1861897761-1695161497-2927542615-642690995-327840285-2659745135-2630312742|" /f
+reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" /v BingSearchEnabled /t REG_DWORD /d 0 /f
+```
+**⚠ Warning:** Do not try removing the Cortana package using `install_wim_tweak` or the PowerShell, as it will break Windows Search and you will have to reinstall Windows.
+
+## Disabling Windows Updates
+
+**⚠ Warning:** You will be unable to use Microsoft Store or any other app that requires Windows Updates to be enabled if you do this.
+
+**Run in Command Prompt,**
+```
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\wuauserv" /v Start /t REG_DWORD /d 4 /f
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\UsoSvc" /v Start /t REG_DWORD /d 4 /f
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\DoSvc" /v Start /t REG_DWORD /d 4 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" /v NoAutoUpdate /t REG_DWORD /d 0 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" /v AUOptions /t REG_DWORD /d 2 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" /v ScheduledInstallDay /t REG_DWORD /d 0 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" /v ScheduledInstallTime /t REG_DWORD /d 3 /f
+```
+
+## Removing Telemetry and other unnecessary services
+
+**Run in Command Prompt,**
+```
+sc delete DiagTrack
+sc delete dmwappushservice
+sc delete WerSvc
+sc delete OneSyncSvc
+sc delete MessagingService
+sc delete wercplsupport
+sc delete PcaSvc
+sc config wlidsvc start=demand
+sc delete wisvc
+sc delete RetailDemo
+sc delete diagsvc
+sc delete shpamsvc 
+sc delete TermService
+sc delete UmRdpService
+sc delete SessionEnv
+sc delete TroubleshootingSvc
+for /f "tokens=1" %I in ('reg query "HKLM\SYSTEM\CurrentControlSet\Services" /k /f "wscsvc" ^| find /i "wscsvc"') do (reg delete %I /f)
+for /f "tokens=1" %I in ('reg query "HKLM\SYSTEM\CurrentControlSet\Services" /k /f "OneSyncSvc" ^| find /i "OneSyncSvc"') do (reg delete %I /f)
+for /f "tokens=1" %I in ('reg query "HKLM\SYSTEM\CurrentControlSet\Services" /k /f "MessagingService" ^| find /i "MessagingService"') do (reg delete %I /f)
+for /f "tokens=1" %I in ('reg query "HKLM\SYSTEM\CurrentControlSet\Services" /k /f "PimIndexMaintenanceSvc" ^| find /i "PimIndexMaintenanceSvc"') do (reg delete %I /f)
+for /f "tokens=1" %I in ('reg query "HKLM\SYSTEM\CurrentControlSet\Services" /k /f "UserDataSvc" ^| find /i "UserDataSvc"') do (reg delete %I /f)
+for /f "tokens=1" %I in ('reg query "HKLM\SYSTEM\CurrentControlSet\Services" /k /f "UnistoreSvc" ^| find /i "UnistoreSvc"') do (reg delete %I /f)
+for /f "tokens=1" %I in ('reg query "HKLM\SYSTEM\CurrentControlSet\Services" /k /f "BcastDVRUserService" ^| find /i "BcastDVRUserService"') do (reg delete %I /f)
+for /f "tokens=1" %I in ('reg query "HKLM\SYSTEM\CurrentControlSet\Services" /k /f "Sgrmbroker" ^| find /i "Sgrmbroker"') do (reg delete %I /f)
+sc delete diagnosticshub.standardcollector.service
+reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Siuf\Rules" /v "NumberOfSIUFInPeriod" /t REG_DWORD /d 0 /f
+reg delete "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Siuf\Rules" /v "PeriodInNanoSeconds" /f
+reg add "HKLM\SYSTEM\ControlSet001\Control\WMI\AutoLogger\AutoLogger-Diagtrack-Listener" /v Start /t REG_DWORD /d 0 /f
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AppCompat" /v AITEnable /t REG_DWORD /d 0 /f
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AppCompat" /v DisableInventory /t REG_DWORD /d 1 /f
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AppCompat" /v DisablePCA /t REG_DWORD /d 1 /f
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AppCompat" /v DisableUAR /t REG_DWORD /d 1 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\MicrosoftEdge\PhishingFilter" /v "EnabledV9" /t REG_DWORD /d 0 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\System" /v "EnableSmartScreen" /t REG_DWORD /d 0 /f
+reg add "HKCU\Software\Microsoft\Internet Explorer\PhishingFilter" /v "EnabledV9" /t REG_DWORD /d 0 /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "NoRecentDocsHistory" /t REG_DWORD /d 1 /f
+reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\CompatTelRunner.exe" /v Debugger /t REG_SZ /d "%windir%\System32\taskkill.exe" /f
+reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\DeviceCensus.exe" /v Debugger /t REG_SZ /d "%windir%\System32\taskkill.exe" /f
+```
+
+### Modifying Scheduled Tasks
+
+**Run in Command Prompt,**
+```
+schtasks /Change /TN "Microsoft\Windows\AppID\SmartScreenSpecific" /disable
+schtasks /Change /TN "Microsoft\Windows\Application Experience\AitAgent" /disable
+schtasks /Change /TN "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /disable
+schtasks /Change /TN "Microsoft\Windows\Application Experience\ProgramDataUpdater" /disable
+schtasks /Change /TN "Microsoft\Windows\Application Experience\StartupAppTask" /disable
+schtasks /Change /TN "Microsoft\Windows\Autochk\Proxy" /disable
+schtasks /Change /TN "Microsoft\Windows\CloudExperienceHost\CreateObjectTask" /disable
+schtasks /Change /TN "Microsoft\Windows\Customer Experience Improvement Program\BthSQM" /disable
+schtasks /Change /TN "Microsoft\Windows\Customer Experience Improvement Program\Consolidator" /disable
+schtasks /Change /TN "Microsoft\Windows\Customer Experience Improvement Program\KernelCeipTask" /disable
+schtasks /Change /TN "Microsoft\Windows\Customer Experience Improvement Program\Uploader" /disable
+schtasks /Change /TN "Microsoft\Windows\Customer Experience Improvement Program\UsbCeip" /disable
+schtasks /Change /TN "Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticDataCollector" /disable
+schtasks /Change /TN "Microsoft\Windows\DiskFootprint\Diagnostics" /disable
+schtasks /Change /TN "Microsoft\Windows\FileHistory\File History (maintenance mode)" /disable
+schtasks /Change /TN "Microsoft\Windows\Maintenance\WinSAT" /disable
+schtasks /Change /TN "Microsoft\Windows\PI\Sqm-Tasks" /disable
+schtasks /Change /TN "Microsoft\Windows\Power Efficiency Diagnostics\AnalyzeSystem" /disable
+schtasks /Change /TN "Microsoft\Windows\Shell\FamilySafetyMonitor" /disable
+schtasks /Change /TN "Microsoft\Windows\Shell\FamilySafetyRefresh" /disable
+schtasks /Change /TN "Microsoft\Windows\Shell\FamilySafetyUpload" /disable
+schtasks /Change /TN "Microsoft\Windows\Windows Error Reporting\QueueReporting" /disable
+schtasks /Change /TN "Microsoft\Windows\WindowsUpdate\Automatic App Update" /disable
+schtasks /Change /TN "Microsoft\Windows\License Manager\TempSignedLicenseExchange" /disable
+schtasks /Change /TN "Microsoft\Windows\Clip\License Validation" /disable
+schtasks /Change /TN "\Microsoft\Windows\ApplicationData\DsSvcCleanup" /disable
+schtasks /Change /TN "\Microsoft\Windows\Power Efficiency Diagnostics\AnalyzeSystem" /disable
+schtasks /Change /TN "\Microsoft\Windows\PushToInstall\LoginCheck" /disable
+schtasks /Change /TN "\Microsoft\Windows\PushToInstall\Registration" /disable
+schtasks /Change /TN "\Microsoft\Windows\Shell\FamilySafetyMonitor" /disable
+schtasks /Change /TN "\Microsoft\Windows\Shell\FamilySafetyMonitorToastTask" /disable
+schtasks /Change /TN "\Microsoft\Windows\Shell\FamilySafetyRefreshTask" /disable
+schtasks /Change /TN "\Microsoft\Windows\Subscription\EnableLicenseAcquisition" /disable
+schtasks /Change /TN "\Microsoft\Windows\Subscription\LicenseAcquisition" /disable
+schtasks /Change /TN "\Microsoft\Windows\Diagnosis\RecommendedTroubleshootingScanner" /disable
+schtasks /Change /TN "\Microsoft\Windows\Diagnosis\Scheduled" /disable
+schtasks /Change /TN "\Microsoft\Windows\NetTrace\GatherNetworkInfo" /disable
+del /F /Q "C:\Windows\System32\Tasks\Microsoft\Windows\SettingSync\*" 
+```
+> Ignore errors, if any.
+
+
+## Extra Tweaking
+
+Now that you've debloated your system to some extent, it's recommended that you make the following changes as well.
+
+### Disable Edit with 3D Paint / 3D Print
+
+Microsoft allows you to uninstall the Paint 3D app as well as other associated apps. When you uninstall those apps, however, the context menu remains unchanged. Run the following commands in command prompt to remove the 'Edit with 3D Paint' option from the context menu:
+```
+for /f "tokens=1* delims=" %I in (' reg query "HKEY_CLASSES_ROOT\SystemFileAssociations" /s /k /f "3D Edit" ^| find /i "3D Edit" ') do (reg delete "%I" /f )
+for /f "tokens=1* delims=" %I in (' reg query "HKEY_CLASSES_ROOT\SystemFileAssociations" /s /k /f "3D Print" ^| find /i "3D Print" ') do (reg delete "%I" /f )
+```
+### Turn off Windows Error reporting
+
+**Run in Command Prompt,**
+```
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting" /v Disabled /t REG_DWORD /d 1 /f
+reg add "HKLM\SOFTWARE\Microsoft\Windows\Windows Error Reporting" /v Disabled /t REG_DWORD /d 1 /f
+```
+### Disable forced updates
+
+**Run in Command Prompt,** 
+```
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" /v NoAutoUpdate /t REG_DWORD /d 0 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" /v AUOptions /t REG_DWORD /d 2 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" /v ScheduledInstallDay /t REG_DWORD /d 0 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" /v ScheduledInstallTime /t REG_DWORD /d 3 /f
+```
+With this you will be notified every time Windows attempts to install an update.
+
+### Disable license checking
+
+**Run in Command Prompt,**
+```
+reg add "HKLM\Software\Policies\Microsoft\Windows NT\CurrentVersion\Software Protection Platform" /v NoGenTicket /t REG_DWORD /d 1 /f
+```
+This change will prevent Windows from checking your license everytime you turn on your PC.
+
+### Disable Sync
+
+**Run in Command Prompt,**
+```
+reg add "HKLM\Software\Policies\Microsoft\Windows\SettingSync" /v DisableSettingSync /t REG_DWORD /d 2 /f
+reg add "HKLM\Software\Policies\Microsoft\Windows\SettingSync" /v DisableSettingSyncUserOverride /t REG_DWORD /d 1 /f
+```
+### Disable Windows Tips
+
+**Run in Command Prompt,**
+```
+reg add "HKLM\Software\Policies\Microsoft\Windows\CloudContent" /v DisableSoftLanding /t REG_DWORD /d 1 /f
+reg add "HKLM\Software\Policies\Microsoft\Windows\CloudContent" /v DisableWindowsSpotlightFeatures /t REG_DWORD /d 1 /f
+reg add "HKLM\Software\Policies\Microsoft\Windows\CloudContent" /v DisableWindowsConsumerFeatures /t REG_DWORD /d 1 /f
+reg add "HKLM\Software\Policies\Microsoft\Windows\DataCollection" /v DoNotShowFeedbackNotifications /t REG_DWORD /d 1 /f
+reg add "HKLM\Software\Policies\Microsoft\WindowsInkWorkspace" /v AllowSuggestedAppsInWindowsInkWorkspace /t REG_DWORD /d 0 /f
+```
+
+## Final Touches
+
+We must disable Windows Spotlight, and other "Suggestions" which are literal ads. To do this, follow the steps below.
+
+1. Go to `Start > Settings > Personalization > Lock screen`:
+    - Set the background to Picture.
+    - Set **Get fun facts, tips, tricks and more on your lock screen** to off.
+
+2. Go to `Personalization > Start`:
+    - Set **Show suggestions occasionally in Start** to off.
+
+3. Go back to Settings and go to `System > Notifications and actions`:
+    - Set **Get tips, tricks, and suggestions as you use Windows** to off.
+    - Set **Show me the Windows welcome...** to off
+
+4. Go to `System > Multitasking`:
+    - Set **Show suggestions occasionally in your timeline** to off.
+
+5. Go back to Settings and go to Privacy:
+    - Turn everything off under **Permissions and History**.
+
+Lastly, **REBOOT YOUR SYSTEM TO FINISH DEBLOATING**.
+
+## FAQs
+
+1. Can Windows revert these changes?
+-> Yes, Windows can and will revert these changes whenever a major update is installed. Users who've disabled Windows Updates
+should be unaffected.
+
+2. Will this hinder my daily workflow?
+-> In most cases this shouldn't affect your daily workflow. However, as we've disabled quite a lot of "features" some users may be affected. So it's highly recommended you do not skip anything mentioned in the guide.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
