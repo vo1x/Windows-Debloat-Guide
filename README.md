@@ -36,9 +36,9 @@ The following are the prerequisites you must have before you begin. And wherever
     - Run the installer and follow through to install Winaero Tweaker.
 
 
-## Uninstalling Bloatware
+## Preliminary Tweaking
 
-#### For clean installs ONLY:
+> If your are not a clean install, please skip this step.
 
 If you have a fresh Windows installation and haven't yet configured anything, you might want to clean up the component store. Please follow the instructions below to do so.
 
@@ -56,6 +56,8 @@ DISM /Online /Cleanup-Image /StartComponentCleanup /ResetBase
 <br>
 
 Once that's done, you can move on to uninstalling the apps.
+
+## Removing Bloatware
 
 **⚠IMPORTANT:** When executing the commands below, always run Powershell and/or Command Prompt as Administrator.
 
@@ -290,6 +292,21 @@ schtasks /Change /TN "Microsoft\XblGameSave\XblGameSaveTask" /disable
 schtasks /Change /TN "Microsoft\XblGameSave\XblGameSaveTaskLogon" /disable
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\GameDVR" /v AllowGameDVR /t REG_DWORD /d 0 /f
 ```
+
+### Microsoft Edge (Chromium)
+
+- Open RUN (`Win + R`), type `%programfiles(x86)%` and press **OK**. This will open the **Program Files (x86)** folder.
+- Now navigate to `Microsoft\Edge\Application\104.0.1293.63\Installer`. The application version maybe different for you so please proceed accordingly.
+- Click on the **[address bar](https://www.customguide.com/windows-10/file-explorer#:~:text=The%20File%20Explorer%20address%20bar,(i.e.%2C%20higher)%20one.)**, type `cmd` and press **Enter**. This will open a Command Prompt window.
+- Run `setup --uninstall --force-uninstall --system-level`.
+- Quit the CMD window, and open RUN(`Win+R`), type `cmd` and press **OK**. This will open another CMD window.
+- Run the commands that follow:
+    ```
+    install_wim_tweak.exe /o /l
+    install_wim_tweak.exe /o /c "Microsoft-Windows-Internet-Browser-Package" /r
+    install_wim_tweak.exe /h /o /l
+    ```
+⚠ After running the above commands, you must restart your computer. However, you can skip it for the time being and restart after the debloating process is complete.
 
 ## Removing Windows Defender
 
