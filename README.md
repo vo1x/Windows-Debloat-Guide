@@ -6,7 +6,6 @@ Windows comes with an extensive list of pre-installed apps (metro apps) and is c
 
 > **Last updated:** August 25, 2022
 
-
 #### ⚠ IMPORTANT:
 
 All changes you make after following this guide **CANNOT** be reversed or undone without reinstalling Windows. Therefore, please do not follow this guide if:
@@ -173,7 +172,7 @@ Get-AppxPackage -AllUsers *maps* | Remove-AppxPackage
 ```
 
 **Run in Command Prompt,**
-```
+```cmd
 sc delete MapsBroker
 sc delete lfsvc
 schtasks /Change /TN "\Microsoft\Windows\Maps\MapsUpdateTask" /disable
@@ -218,7 +217,7 @@ Get-WindowsPackage -Online | Where PackageName -like *QuickAssist* | Remove-Wind
 ### OneDrive
 
 **Run in Command Prompt,**
-```
+```cmd
 %SystemRoot%\SysWOW64\OneDriveSetup.exe /uninstall
 rd "%UserProfile%\OneDrive" /s /q
 rd "%LocalAppData%\Microsoft\OneDrive" /s /q
@@ -242,7 +241,7 @@ Get-WindowsPackage -Online | Where PackageName -like *Hello-Face* | Remove-Windo
 ```
 
 **Run in Command Prompt,**
-```
+```cmd
 schtasks /Change /TN "\Microsoft\Windows\HelloFace\FODCleanupTask" /Disable
 ```
 
@@ -255,7 +254,7 @@ Get-AppxPackage -AllUsers *store* | Remove-AppxPackage
 > Ignore errors, if there are any.
 
 **Run in Command Prompt,**
-```
+```cmd
 install_wim_tweak /o /c Microsoft-Windows-ContentDeliveryManager /r
 install_wim_tweak /o /c Microsoft-Windows-Store /r
 ``` 
@@ -263,7 +262,7 @@ install_wim_tweak /o /c Microsoft-Windows-Store /r
 <br> **⚠ Warning:** Do NOT run the following commands if you will be using any UWP app in the future.
 
 **Run in Command Prompt,**
-```cmd
+```cmdcmd
 reg add "HKLM\Software\Policies\Microsoft\WindowsStore" /v RemoveWindowsStore /t REG_DWORD /d 1 /f
 reg add "HKLM\Software\Policies\Microsoft\WindowsStore" /v DisableStoreApps /t REG_DWORD /d 1 /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\AppHost" /v "EnableWebContentEvaluation" /t REG_DWORD /d 0 /f
@@ -311,7 +310,7 @@ reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\GameDVR" /v AllowGameDVR /t RE
 **⚠ Warning:** This will break Windows Updates.
 
 **Run in Command Prompt,**
-```
+```cmd
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" /v SmartScreenEnabled /t REG_SZ /d "Off" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\AppHost" /v "EnableWebContentEvaluation" /t REG_DWORD /d "0" /f
 reg add "HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge\PhishingFilter" /v "EnabledV9" /t REG_DWORD /d "0" /f
@@ -346,7 +345,7 @@ Once you take ownership of both folders,
 
 With the Anniversary Update, Microsoft hid the option to disable Cortana. So you need to make a couple registry changes to disable Cortana (to an extent). 
 **Run in Command Prompt,**
-```
+```cmd
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v AllowCortana /t REG_DWORD /d 0 /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules"  /v "{2765E0F4-2918-4A46-B9C9-43CDD8FCBA2B}" /t REG_SZ /d  "BlockCortana|Action=Block|Active=TRUE|Dir=Out|App=C:\windows\systemapps\microsoft.windows.cortana_cw5n1h2txyewy\searchui.exe|Name=Search  and Cortana  application|AppPkgId=S-1-15-2-1861897761-1695161497-2927542615-642690995-327840285-2659745135-2630312742|" /f
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" /v BingSearchEnabled /t REG_DWORD /d 0 /f
@@ -358,7 +357,7 @@ reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" /v BingSearchEna
 **⚠ Warning:** You will be unable to use Microsoft Store or any other app that requires Windows Updates to be enabled if you do this.
 
 **Run in Command Prompt,**
-```
+```cmd
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\wuauserv" /v Start /t REG_DWORD /d 4 /f
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\UsoSvc" /v Start /t REG_DWORD /d 4 /f
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\DoSvc" /v Start /t REG_DWORD /d 4 /f
@@ -371,7 +370,7 @@ reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" /v Scheduled
 ## Removing Telemetry and other unnecessary services
 
 **Run in Command Prompt,**
-```
+```cmd
 sc delete DiagTrack
 sc delete dmwappushservice
 sc delete WerSvc
@@ -415,7 +414,7 @@ reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution 
 ### Modifying Scheduled Tasks
 
 **Run in Command Prompt,**
-```
+```cmd
 schtasks /Change /TN "Microsoft\Windows\AppID\SmartScreenSpecific" /disable
 schtasks /Change /TN "Microsoft\Windows\Application Experience\AitAgent" /disable
 schtasks /Change /TN "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /disable
@@ -472,14 +471,14 @@ for /f "tokens=1* delims=" %I in (' reg query "HKEY_CLASSES_ROOT\SystemFileAssoc
 ### Turn off Windows Error reporting
 
 **Run in Command Prompt,**
-```
+```cmd
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting" /v Disabled /t REG_DWORD /d 1 /f
 reg add "HKLM\SOFTWARE\Microsoft\Windows\Windows Error Reporting" /v Disabled /t REG_DWORD /d 1 /f
 ```
 ### Disable forced updates
 
 **Run in Command Prompt,** 
-```
+```cmd
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" /v NoAutoUpdate /t REG_DWORD /d 0 /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" /v AUOptions /t REG_DWORD /d 2 /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" /v ScheduledInstallDay /t REG_DWORD /d 0 /f
@@ -490,7 +489,7 @@ With this you will be notified every time Windows attempts to install an update.
 ### Disable license checking
 
 **Run in Command Prompt,**
-```
+```cmd
 reg add "HKLM\Software\Policies\Microsoft\Windows NT\CurrentVersion\Software Protection Platform" /v NoGenTicket /t REG_DWORD /d 1 /f
 ```
 This change will prevent Windows from checking your license everytime you turn on your PC.
@@ -498,14 +497,14 @@ This change will prevent Windows from checking your license everytime you turn o
 ### Disable Sync
 
 **Run in Command Prompt,**
-```
+```cmd
 reg add "HKLM\Software\Policies\Microsoft\Windows\SettingSync" /v DisableSettingSync /t REG_DWORD /d 2 /f
 reg add "HKLM\Software\Policies\Microsoft\Windows\SettingSync" /v DisableSettingSyncUserOverride /t REG_DWORD /d 1 /f
 ```
 ### Disable Windows Tips
 
 **Run in Command Prompt,**
-```
+```cmd
 reg add "HKLM\Software\Policies\Microsoft\Windows\CloudContent" /v DisableSoftLanding /t REG_DWORD /d 1 /f
 reg add "HKLM\Software\Policies\Microsoft\Windows\CloudContent" /v DisableWindowsSpotlightFeatures /t REG_DWORD /d 1 /f
 reg add "HKLM\Software\Policies\Microsoft\Windows\CloudContent" /v DisableWindowsConsumerFeatures /t REG_DWORD /d 1 /f
@@ -538,14 +537,14 @@ Lastly, **REBOOT YOUR SYSTEM TO FINISH DEBLOATING**.
 
 ## FAQs
 
-1. Can Windows revert these changes?
+1. **Can Windows revert these changes?**
 
-**->** Yes, Windows can and will revert these changes whenever a major update is installed. Users who've disabled Windows Updates
-should be unaffected.
+    Yes, Windows can and will revert these changes whenever a major update is installed. Users who've disabled Windows Updates
+    should be unaffected.
 
-2. Will this hinder my daily workflow?
+2. **Will this hinder my daily workflow?**
 
-**->** In most cases this shouldn't affect your daily workflow. However, as we've disabled quite a lot of "features" some users may be affected. So it's highly recommended you do not skip anything mentioned in the guide.
+    In most cases this shouldn't affect your daily workflow. However, as we've disabled quite a lot of "features" some users may be affected. So it's highly recommended you do not skip anything mentioned in the guide.
 
 
 
