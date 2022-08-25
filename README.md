@@ -31,9 +31,6 @@ The following are the prerequisites you must have before you begin. And wherever
 
 - NTFS Access 2.5
 - Dism++ 10.1.1002.1
-- Winaero Tweaker
-    - Extract the `winaerotweaker` zip file.
-    - Run the installer and follow through to install Winaero Tweaker.
 
 
 ## Preliminary Tweaking
